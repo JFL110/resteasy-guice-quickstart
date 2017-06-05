@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TestIntegration {
 	
 	public static final EmbeddedJetty server = EmbeddedJetty.embeddedJetty()
-												.withContextListener(new TestAppContextListener())
+												.withContextListener(new AppContextListener())
 												.build();
 	
 	
