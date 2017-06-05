@@ -1,2 +1,4 @@
-after_success:
-- ./gradlew jacocoTestReport coveralls
+# Ignore this branch
+branches:
+  only:
+    -master
