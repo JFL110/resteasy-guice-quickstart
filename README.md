@@ -1,1 +1,1 @@
-# restlet-guice-quickstart
+# Restlet Guice Quickstart
