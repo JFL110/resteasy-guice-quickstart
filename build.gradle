@@ -1,0 +1,61 @@
+buildscript {  
+  repositories {
+    jcenter() 
+    mavenCentral()
+  }
+}
+
+plugins {
+  id "com.github.kt3k.coveralls" version "2.7.1"
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'java' 
+apply plugin: 'war'    
+
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+
+repositories { 
+  mavenLocal()
+  jcenter()
+  mavenCentral()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+    }
+}
+
+dependencies {
+  
+   compile group: 'org.jboss.resteasy', name: 'resteasy-guice', version: '3.0.0.Final'
+   compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.0.0.Final'
+   compile group: 'org.jboss.resteasy', name: 'resteasy-jackson-provider', version: '3.0.0.Final'
+  
+   compile group: 'joda-time', name: 'joda-time', version:'2.9.4'
+   compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+   compile group: 'com.google.guava', name: 'guava', version: '20.0'
+   
+   compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.3.18.v20170406'
+   compile group: 'org.eclipse.jetty', name: 'jetty-webapp', version: '9.3.18.v20170406'
+    
+   compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
+
+   compile group: 'com.google.inject.extensions', name: 'guice-multibindings', version: '4.0'
+   compile group: 'com.google.inject.extensions', name: 'guice-servlet', version:'4.0'
+   compile group: 'com.google.inject', name: 'guice', version:'4.0'
+
+   testCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+   testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
+   testCompile group: 'junit', name: 'junit', version:'4.12'
+  
+  testCompile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.26-b03'
+  testCompile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.25'  
+}
+
+sourceSets.main.output.classesDir = 'build/exploded-app/WEB-INF/classes'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
