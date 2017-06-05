@@ -64,7 +64,7 @@ public class EmbeddedJetty {
 
 	
 	/**
-	 * Starts the server. If using as a @Rule it is not necessary to invoke this method.
+	 * Starts the server.
 	 */
 	public void start() throws Exception {
 
@@ -81,7 +81,7 @@ public class EmbeddedJetty {
 
 	
 	/**
-	 * Stops the server. If using as a @Rule it is not necessary to invoke this method.
+	 * Stops the server.
 	 */
 	public void stop() throws Exception {
 		server.stop();
