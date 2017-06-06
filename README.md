@@ -4,3 +4,5 @@
 A start point to create a JAX-RS app using:
 - Guice
 - Resteasy
+
+Checkout the [tests](https://github.com/JFL110/resteasy-guice-quickstart/tree/master/src/test/java/org/jfl110/quickstart/example) for an example of how to use.
