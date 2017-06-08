@@ -1,4 +1,6 @@
-## Maven Repository for Resteasy Guice Quickstart
+##  Maven Repository for Resteasy Guice Quickstart
+
+## TODO
 
 Example Gradle usage:
 ~~~~
