@@ -4,7 +4,7 @@ Example Gradle usage:
 ~~~~
 repositories { 
   maven {
-    url 'https://github.com/JFL110/resteasy-guice-quickstart/app-base-auth/raw/maven-repo'
+    url 'https://github.com/JFL110/resteasy-guice-quickstart/raw/maven-repo'
   }
 }
 
