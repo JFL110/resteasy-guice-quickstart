@@ -16,6 +16,10 @@ apply plugin: 'maven'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
+group = 'org.jfl110'
+version = '1.0-SNAPSHOT' 
+description = "resteasy-guice-quickstart"
+
 repositories { 
   mavenLocal()
   jcenter()
