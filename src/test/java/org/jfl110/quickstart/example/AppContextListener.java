@@ -18,9 +18,9 @@ import com.google.inject.servlet.ServletModule;
  *
  * @author JFL110
  */
-class TestAppContextListener extends RestEasyGuiceServletContextListener {
+class AppContextListener extends RestEasyGuiceServletContextListener {
 
-	public TestAppContextListener() {
+	public AppContextListener() {
 		super(new Module());
 	}
 	

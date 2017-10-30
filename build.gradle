@@ -19,7 +19,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 
 group = 'org.jfl110'
 version = '1.0-SNAPSHOT' 
-description = "reslet guice quickstart"
+description = "resteasy-guice-quickstart"
 
 repositories { 
   mavenLocal()
