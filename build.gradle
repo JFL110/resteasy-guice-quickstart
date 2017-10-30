@@ -12,9 +12,14 @@ plugins {
 apply plugin: 'eclipse'
 apply plugin: 'java' 
 apply plugin: 'war'    
+apply plugin: 'maven'
 
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
+
+group = 'org.jfl110'
+version = '1.0-SNAPSHOT' 
+description = "reslet guice quickstart"
 
 repositories { 
   mavenLocal()
@@ -51,8 +56,8 @@ dependencies {
    testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
    testCompile group: 'junit', name: 'junit', version:'4.12'
   
-  testCompile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.26-b03'
-  testCompile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.25'  
+   testCompile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.26-b03'
+   testCompile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.25'  
 }
 
 sourceSets.main.output.classesDir = 'build/exploded-app/WEB-INF/classes'

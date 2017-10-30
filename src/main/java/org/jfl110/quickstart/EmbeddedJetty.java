@@ -6,7 +6,12 @@ import java.util.EnumSet;
 import javax.servlet.ServletContextListener;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
 
 import com.google.inject.servlet.GuiceFilter;
 
@@ -15,7 +20,7 @@ import com.google.inject.servlet.GuiceFilter;
  * 
  * @author JFL110
  */
-public class EmbeddedJetty {
+public class EmbeddedJetty implements TestRule {
 	
 	/**
 	 * Builder to construct the EmbeddedJetty server.
@@ -75,7 +80,14 @@ public class EmbeddedJetty {
 		context.addEventListener(contextListener);
 		context.addFilter(GuiceFilter.class, "/*",EnumSet.of(javax.servlet.DispatcherType.REQUEST, javax.servlet.DispatcherType.ASYNC));
 		
-		server.setHandler(context);
+		ResourceHandler resourceHandler = new ResourceHandler();
+		resourceHandler.setDirectoriesListed(true);
+		resourceHandler.setResourceBase(".");
+		
+		HandlerList handlerList =  new HandlerList();
+		handlerList.addHandler(context);
+		handlerList.addHandler(resourceHandler);
+		server.setHandler(handlerList);
 		server.start();
 	}
 
@@ -93,5 +105,21 @@ public class EmbeddedJetty {
 	 */
 	public URI getBaseUri() {
 		return server.getURI();
+	}
+
+	
+	@Override
+	public Statement apply(Statement base, Description description) {
+		return new Statement() {
+			@Override
+			public void evaluate() throws Throwable {
+				try {
+					start();
+					base.evaluate();
+				} finally {
+					stop();
+				}
+			}
+		};
 	}
 }
