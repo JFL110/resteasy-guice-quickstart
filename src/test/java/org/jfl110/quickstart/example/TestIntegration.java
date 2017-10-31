@@ -7,9 +7,8 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.jfl110.quickstart.EmbeddedJetty;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.jfl110.testing.utils.EmbeddedJetty;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,22 +21,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class TestIntegration {
 	
+	@ClassRule
 	public static final EmbeddedJetty server = EmbeddedJetty.embeddedJetty()
 												.withContextListener(new AppContextListener())
 												.build();
-	
-	
-	@BeforeClass
-	public static void beforeClass() throws Exception{
-		server.start();
-	}
-	
-	
-	@AfterClass
-	public static void afterClass() throws Exception{
-		server.stop();
-	}
-	
 	
 	/**
 	 * Tests the '.../secure-bean' path without the token header

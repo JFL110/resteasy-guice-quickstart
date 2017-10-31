@@ -1,14 +1,8 @@
 package org.jfl110.quickstart.example;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.jfl110.quickstart.RestEasyGuiceServletContextListener;
+import org.jfl110.quickstart.StringServlet;
 
 import com.google.inject.Singleton;
 import com.google.inject.servlet.ServletModule;
@@ -23,15 +17,13 @@ class AppContextListener extends RestEasyGuiceServletContextListener {
 	public AppContextListener() {
 		super(new Module());
 	}
-	
+
 	/**
 	 * ServletModule which defines the app bindings and endpoints.
 	 *
 	 * @author JFL110
 	 */
-	private static class Module extends ServletModule
-	{
-		@SuppressWarnings("serial")
+	private static class Module extends ServletModule {
 		@Override
 		protected void configureServlets() {
 
@@ -44,13 +36,7 @@ class AppContextListener extends RestEasyGuiceServletContextListener {
 			bind(ExampleFilter.class);
 
 			// Bind a regular servlet
-			serve("/word").with(new HttpServlet() {
-				@Override
-				protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-						throws ServletException, IOException {
-					resp.getWriter().print("bird");
-				}
-			});
+			serve("/word").with(StringServlet.of("bird"));
 		}
 	}
 }

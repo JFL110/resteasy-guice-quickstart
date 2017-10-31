@@ -6,30 +6,28 @@ import com.google.inject.ImplementedBy;
 interface ExampleService {
 
 	JsonBean readBean();
-	
+
 	JsonBean getSecureBean(String name);
-	
-	class Impl implements ExampleService{
+
+	class Impl implements ExampleService {
 		@Override
 		public JsonBean readBean() {
 			return new JsonBean("Dave");
 		}
 
-		
 		@Override
 		public JsonBean getSecureBean(String name) {
-			return new JsonBean(name+"Secure");
+			return new JsonBean(name + "Secure");
 		}
 	}
-	
-	
-	static final class JsonBean{
+
+	static final class JsonBean {
 		private final String name;
-		
-		JsonBean(String name){
+
+		JsonBean(String name) {
 			this.name = name;
 		}
-		
+
 		public String getName() {
 			return name;
 		}
