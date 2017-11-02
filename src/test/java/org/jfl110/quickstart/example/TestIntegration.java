@@ -7,12 +7,15 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jfl110.quickstart.time.CurrentDateTime;
 import org.jfl110.testing.utils.EmbeddedJetty;
+import org.joda.time.LocalDateTime;
 import org.junit.ClassRule;
 import org.junit.Test;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.inject.Module;
 
 /**
  * Example integration test for TestAppContextListener.
@@ -21,10 +24,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class TestIntegration {
 	
+	private static final LocalDateTime CURRENT_TIME = new LocalDateTime(2017, 11, 1, 12, 34, 55);
 	@ClassRule
-	public static final EmbeddedJetty server = EmbeddedJetty.embeddedJetty()
-												.withContextListener(new AppContextListener())
-												.build();
+	public static final EmbeddedJetty server = EmbeddedJetty
+			.embeddedJetty().withContextListener(
+			  new AppContextListener((Module) binder -> 
+			    binder.bind(LocalDateTime.class).annotatedWith(CurrentDateTime.class).toProvider(() -> CURRENT_TIME)))
+			.build();
 	
 	/**
 	 * Tests the '.../secure-bean' path without the token header
@@ -111,7 +117,22 @@ public class TestIntegration {
 	
 
 	/**
-	 * Tests the '/file-cached' path
+	 * Tests the '/time' path
+	 */
+	@Test
+	public void testTimePath() {
+		String time = ClientBuilder
+						.newClient()
+						.target(server.getBaseUri())
+						.path("service/resource/time")
+						.request(MediaType.TEXT_PLAIN_TYPE).get(String.class);
+
+		assertEquals(CURRENT_TIME.toString(), time);
+	}
+	
+	
+	/**
+	 * Tests the '/time' path
 	 */
 	@Test
 	public void testFileCachedPath() {
