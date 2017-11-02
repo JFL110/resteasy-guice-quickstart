@@ -8,7 +8,6 @@ import org.jfl110.quickstart.logging.LoggingFilter;
 
 import com.google.common.collect.FluentIterable;
 import com.google.inject.Module;
-import com.google.inject.Singleton;
 import com.google.inject.servlet.ServletModule;
 
 /**
@@ -32,7 +31,6 @@ class AppContextListener extends RestEasyGuiceServletContextListener {
 		protected void configureServlets() {
 
 			// Hook Guice and Restlet together
-			bind(HttpServletDispatcher.class).in(Singleton.class);
 			serve("/service/*").with(HttpServletDispatcher.class);
 
 			// Bind Jax-RS resources
