@@ -1,6 +1,8 @@
 package org.jfl110.quickstart.example;
 
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
+import org.jfl110.quickstart.FileServlet;
+import org.jfl110.quickstart.LoggingFilter;
 import org.jfl110.quickstart.RestEasyGuiceServletContextListener;
 import org.jfl110.quickstart.StringServlet;
 
@@ -34,9 +36,12 @@ class AppContextListener extends RestEasyGuiceServletContextListener {
 			// Bind Jax-RS resources
 			bind(ExampleResource.class);
 			bind(ExampleFilter.class);
+			bind(LoggingFilter.class);
 
 			// Bind a regular servlet
 			serve("/word").with(StringServlet.of("bird"));
+			serve("/file").with(FileServlet.ofUncachedFile("some-text.txt"));
+			serve("/file-cached").with(FileServlet.ofCachedFile("some-text.txt"));
 		}
 	}
 }

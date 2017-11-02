@@ -38,7 +38,7 @@ public class TestIntegration {
 							.request(MediaType.APPLICATION_JSON)
 							.head();
 
-		assertEquals(406,response.getStatus());
+		assertEquals(406, response.getStatus());
 	}
 	
 	
@@ -59,7 +59,7 @@ public class TestIntegration {
 								.get(ClientBean.class);
 
 		assertNotNull(beanResponse);
-		assertEquals(nameIn+"Secure",beanResponse.name);
+		assertEquals(nameIn+"Secure", beanResponse.name);
 	}
 	
 	
@@ -76,7 +76,7 @@ public class TestIntegration {
 							.request(MediaType.APPLICATION_JSON).get(ClientBean.class);
 
 		assertNotNull(bean);
-		assertEquals("Dave",bean.name);
+		assertEquals("Dave", bean.name);
 	}
 
 	
@@ -91,12 +91,42 @@ public class TestIntegration {
 						.path("word")
 						.request(MediaType.TEXT_PLAIN_TYPE).get(String.class);
 
-		assertEquals("bird",word);
+		assertEquals("bird", word);
 	}
 	
 	
+	/**
+	 * Tests the '/file' path
+	 */
+	@Test
+	public void testFilePath() {
+		String fileContents = ClientBuilder
+						.newClient()
+						.target(server.getBaseUri())
+						.path("file")
+						.request(MediaType.TEXT_PLAIN_TYPE).get(String.class);
+
+		assertEquals("Some text!", fileContents);
+	}
+	
+
+	/**
+	 * Tests the '/file-cached' path
+	 */
+	@Test
+	public void testFileCachedPath() {
+		String fileContents = ClientBuilder
+						.newClient()
+						.target(server.getBaseUri())
+						.path("file-cached")
+						.request(MediaType.TEXT_PLAIN_TYPE).get(String.class);
+
+		assertEquals("Some text!", fileContents);
+	}
+	
 	
 	public static class ClientBean{
+		
 		final String name;
 		
 		@JsonCreator
