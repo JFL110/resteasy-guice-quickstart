@@ -1,6 +1,6 @@
 # Resteasy Guice Quickstart
 [![Build Status](https://travis-ci.org/JFL110/resteasy-guice-quickstart.svg?branch=master)](https://travis-ci.org/JFL110/resteasy-guice-quickstart) [![Coverage Status](https://coveralls.io/repos/github/JFL110/resteasy-guice-quickstart/badge.svg?branch=master)](https://coveralls.io/github/JFL110/resteasy-guice-quickstart?branch=master)
-![One of James' bits](https://img.shields.io/badge/james'-bits-orange.svg)
+[![One of James' bits](https://img.shields.io/badge/james'-bits-orange.svg)](https://github.com/JFL110/)
 
 A start point to create a JAX-RS app using:
 - [Guice](https://github.com/google/guice/wiki/GettingStarted)
